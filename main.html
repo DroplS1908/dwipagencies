@@ -11,7 +11,7 @@
       padding: 0;
       box-sizing: border-box;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        Oxygen, Ubuntu, Cantarell,  "Open Sans", "Helvetica Neue", sans-serif;
     }
 
     body {
@@ -519,64 +519,173 @@
       box-shadow: 0 5px 15px rgba(106, 58, 228, 0.7);
     }
 
-    .hero {
-      text-align: center;
-      padding: 8rem 1rem 10rem;
-      position: relative;
-      z-index: 5;
-    }
+.hero {
+   text-align: center;
+  padding: 2rem 1rem 6rem;
+  position: relative;
+  z-index: 5;
+}
 
-    .new-badge {
-      display: inline-block;
-      background-color: rgba(106, 58, 228, 0.2);
-      color: #bb86fc;
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      margin-bottom: 1.5rem;
-      position: relative;
-      z-index: 5;
-    }
+.hero-badges {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
 
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1.5rem;
-      background: linear-gradient(90deg, white, #bb86fc);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      max-width: 800px;
-      margin: 0 auto 1rem;
-      position: relative;
-      z-index: 5;
-    }
+.new-badge {
+  display: inline-block;
+  background-color: rgba(106, 58, 228, 0.2);
+  color: #bb86fc;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  position: relative;
+  z-index: 5;
+  transition: all 0.3s ease;
+}
 
-    .hero p {
-      color: rgba(255, 255, 255, 0.8);
-      max-width: 600px;
-      margin: 0 auto 2rem;
-      line-height: 1.6;
-      position: relative;
-      z-index: 5;
-    }
+.new-badge.accent {
+  background-color: rgba(187, 134, 252, 0.2);
+  color: #6a3ae4;
+}
 
-    .start-btn {
-      background-color: white;
-      color: #0a0a0e;
-      border: none;
-      border-radius: 5px;
-      padding: 0.8rem 1.5rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      z-index: 5;
-      position: relative;
-    }
+.new-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(106, 58, 228, 0.3);
+}
 
-    .start-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
-    }
+.hero h1 {
+  font-size: 3.8rem;
+  margin-bottom: 1.5rem;
+  color: white;
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+  position: relative;
+  z-index: 5;
+  font-weight: 700;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #bb86fc, #6a3ae4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+}
+
+.gradient-text::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #bb86fc, #6a3ae4);
+  opacity: 0.6;
+}
+
+.hero p {
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 650px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+  position: relative;
+  z-index: 5;
+  font-size: 1.1rem;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.start-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 1.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 5;
+  position: relative;
+  font-size: 1rem;
+}
+
+.start-btn.primary {
+  background-color: white;
+  color: #0a0a0e;
+}
+
+.start-btn.secondary {
+  background-color: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.start-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+.start-btn.primary:hover {
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
+}
+
+.hero-features {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+.feature-icon {
+  width: 20px;
+  height: 20px;
+  color: #bb86fc;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 1.5rem 1rem 4rem;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .start-btn {
+    width: 80%;
+  }
+  
+  .hero-features {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .hero-badges {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
 
     /* About us section with white background */
     .about-section {
@@ -1114,29 +1223,59 @@
       <button class="waitlist-btn">Learn More</button>
     </nav>
 
-    <section class="hero">
-      <div class="new-badge">Trusted Partner of Jio Society</div>
-      <h1>Welcome to Dwip Agencies.</h1>
-      <p>
-        Connect your home and office with our cutting-edge communication and
-        smart living solutions. Trusted by thousands of satisfied customers
-        across India.
-      </p>
-      <button class="start-btn">Learn More</button>
-    </section>
+   <section class="hero">
+  <div class="hero-badges">
+    <div class="new-badge">Trusted Partner of Jio Society</div>
+    <div class="new-badge accent">Since 2022</div>
+  </div>
+  <h1>Transforming Spaces with <span class="gradient-text">Smart Solutions</span></h1>
+  <p>
+    Connect your home and office with our cutting-edge communication and
+    smart living solutions. Trusted by over 100+ residential societies and businesses across India.
+  </p>
+  <div class="hero-buttons">
+    <button class="start-btn primary">Get Started</button>
+    <button class="start-btn secondary">View Solutions</button>
+  </div>
+  <div class="hero-features">
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <span>Jio Authorized</span>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+      </div>
+      <span>Secure Solutions</span>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      </div>
+      <span>Energy Efficient</span>
+    </div>
+  </div>
+</section>
 
   </div>
   <div class="secondary-navbar-container">
     <div class="secondary-navbar">
       <div class="secondary-nav-links">
-        <a href="#our-story" class="secondary-nav-item active">Our Story</a>
-        <a href="#leadership-team" class="secondary-nav-item">Leadership Team</a>
-        <a href="#vision-mission" class="secondary-nav-item">Vision & Mission</a>
-        <a href="#testimonials" class="secondary-nav-item">Testimonials</a>
-        <a href="#client-success" class="secondary-nav-item">Client Success</a>
-        <a href="#partner-network" class="secondary-nav-item">Partner Network</a>
-        <a href="#locations" class="secondary-nav-item">Locations</a>
-        <a href="#service-areas" class="secondary-nav-item">Service Areas</a>
+        <a href="#our-story" class="secondary-nav-item active">Jio Centrex™</a>
+        <a href="#locations" class="secondary-nav-item">Digital Signage</a>
+        <a href="#vision-mission" class="secondary-nav-item">Solar Powered Housing</a>
+        <a href="#testimonials" class="secondary-nav-item">Surveilance & Security Solutions</a>
+        <a href="#client-success" class="secondary-nav-item">EV Charging</a>
+        <a href="#partner-network" class="secondary-nav-item">Management Solutions</a>
+        <a href="#leadership-team" class="secondary-nav-item">JioFIber™</a>
       </div>
     </div>
   </div>
