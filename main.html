@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to Dwip Agencies</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    }
+
+    body {
+      color: white;
+      overflow-x: hidden;
+      /* Prevent horizontal scrollbar */
+    }
+
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      border-radius: 100vh;
+      background: rgb(10, 10, 14, 1);
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      border-radius: 100vh;
+      background: linear-gradient(rgb(10, 10, 14, 1), rgba(106, 58, 228, 0.1), rgb(187, 134, 252));
+    }
+
+
+    /* Background patterns for dark section */
+    .dark-section {
+      background-color: #0a0a0e;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated gradient circle pattern */
+    .pattern-circles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at center,
+          rgba(187, 134, 252, 0.3),
+          rgba(106, 58, 228, 0.1) 60%,
+          transparent);
+      animation: float 15s infinite ease-in-out;
+    }
+
+    .circle:nth-child(1) {
+      width: 400px;
+      height: 400px;
+      top: -100px;
+      left: -100px;
+      animation-delay: 0s;
+    }
+
+    .circle:nth-child(2) {
+      width: 300px;
+      height: 300px;
+      top: 50%;
+      right: -50px;
+      animation-delay: 2s;
+    }
+
+    .circle:nth-child(3) {
+      width: 250px;
+      height: 250px;
+      bottom: -50px;
+      left: 30%;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) translateX(0);
+      }
+
+      25% {
+        transform: translateY(-20px) translateX(10px);
+      }
+
+      50% {
+        transform: translateY(0) translateX(20px);
+      }
+
+      75% {
+        transform: translateY(20px) translateX(10px);
+      }
+    }
+
+    /* Grid pattern overlay */
+    .pattern-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px,
+          transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 30px 30px;
+      z-index: 1;
+    }
+
+    /* Diagonal lines pattern */
+    .pattern-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: repeating-linear-gradient(45deg,
+          rgba(187, 134, 252, 0.03),
+          rgba(187, 134, 252, 0.03) 1px,
+          transparent 1px,
+          transparent 10px);
+      z-index: 2;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+    }
+
+    .logo {
+      object-fit: contain;
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    .logo:hover {
+      transform: rotate(5deg) translateY(-2px);
+    }
+
+    .logo::after {
+      content: "";
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center,
+          rgba(187, 134, 252, 0.7) 0%,
+          rgba(187, 134, 252, 0) 70%);
+      filter: blur(6px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .logo:hover::after {
+      opacity: 1;
+    }
+
+    .logo-wrapper {
+      position: relative;
+      display: inline-block;
+      z-index: 10;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin: 0;
+      background-color: rgba(30, 30, 40, 0.5);
+      border-radius: 30px;
+      padding: 0.5rem 1.5rem;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-item {
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.5rem 0;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-item:hover {
+      color: #ffffff;
+    }
+
+    .dropdown-icon {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown-icon::after {
+      content: "";
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-right: 2px solid rgba(255, 255, 255, 0.85);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.85);
+      transform: rotate(45deg);
+      top: 0;
+    }
+
+    .nav-item:hover .dropdown-icon {
+      transform: rotate(180deg);
+    }
+
+    /* Fixed dropdown styles */
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      /* Center align with parent */
+      transform: translateX(-50%);
+      width: 90vw;
+      max-width: 1200px;
+      /* Reduced from 1800px for better control */
+      background-color: #1e1e28;
+      padding: 12px 20px;
+      /* Significantly reduced padding */
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      margin-top: 8px;
+      /* Reduced top margin */
+      display: flex;
+      z-index: 1000;
+      border-radius: 8px;
+      backdrop-filter: blur(15px);
+    }
+
+    .nav-item:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .dropdown-inner {
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      /* Allow wrapping on smaller screens */
+    }
+
+    .dropdown-menu-column {
+      flex: 1;
+      min-width: 180px;
+      /* Ensure minimum width for columns */
+      padding: 0 10px;
+      /* Reduced horizontal padding */
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 5px;
+      /* Reduced bottom margin */
+    }
+
+    .dropdown-menu-column:last-child {
+      border-right: 0;
+    }
+
+    .dropdown-menu-title {
+      color: #bb86fc;
+      font-weight: 600;
+      font-size: 0.9rem;
+      /* Reduced font size */
+      margin-bottom: 6px;
+      /* Reduced margin */
+      display: block;
+      white-space: nowrap;
+      /* Prevent title wrapping */
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 3px 0;
+      /* Reduced vertical padding */
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      transition: all 0.2s;
+      font-size: 0.85rem;
+      /* Slightly smaller font */
+      white-space: nowrap;
+      /* Prevent text wrapping */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      /* Add ellipsis for overflowing text */
+    }
+
+    .dropdown-menu a:hover {
+      color: #bb86fc;
+      padding-left: 5px;
+    }
+
+    .dropdown-featured {
+      flex-basis: 100%;
+      margin-top: 8px;
+      /* Reduced top margin */
+      padding-top: 8px;
+      /* Reduced top padding */
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      /* Allow wrapping on smaller screens */
+    }
+
+    .dropdown-featured-item {
+      background-color: rgba(187, 134, 252, 0.05);
+      border-radius: 8px;
+      padding: 8px;
+      /* Reduced padding */
+      width: 48%;
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
+      /* Reduced bottom margin */
+    }
+
+    .dropdown-featured-icon {
+      width: 30px;
+      /* Reduced size */
+      height: 30px;
+      /* Reduced size */
+      min-width: 30px;
+      /* Ensure icon doesn't shrink */
+      background-color: rgba(187, 134, 252, 0.1);
+      border-radius: 6px;
+      /* Slightly smaller radius */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      /* Reduced margin */
+    }
+
+    .dropdown-featured-icon svg {
+      width: 18px;
+      /* Reduced size */
+      height: 18px;
+      /* Reduced size */
+      color: #bb86fc;
+    }
+
+    .dropdown-featured-content {
+      flex: 1;
+      /* Allow content to take available space */
+      min-width: 0;
+      /* Allow content to shrink if needed */
+    }
+
+    .dropdown-featured-content h4 {
+      font-size: 0.85rem;
+      /* Reduced font size */
+      color: white;
+      margin-bottom: 2px;
+      /* Reduced margin */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .dropdown-featured-content p {
+      font-size: 0.75rem;
+      /* Reduced font size */
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.2;
+      /* Reduced line height */
+      margin: 0;
+      /* Remove any default margin */
+    }
+
+    /* Image sections */
+    .dropdown-image-section {
+      flex: 1.2;
+      min-width: 180px;
+      /* Reduced minimum width */
+      padding: 0 10px;
+      /* Reduced padding */
+      margin-bottom: 5px;
+      /* Reduced bottom margin */
+    }
+
+    .dropdown-image-wrapper {
+      position: relative;
+      height: 120px;
+      /* Significantly reduced height */
+      border-radius: 6px;
+      /* Slightly smaller radius */
+      overflow: hidden;
+      margin-bottom: 5px;
+      /* Reduced margin */
+    }
+
+    .dropdown-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .dropdown-image-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(10, 10, 14, 0.9), transparent);
+      padding: 8px;
+      /* Reduced padding */
+      color: white;
+    }
+
+    .dropdown-image-caption h4 {
+      font-size: 0.85rem;
+      /* Reduced font size */
+      margin-bottom: 2px;
+      /* Reduced margin */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .dropdown-image-caption p {
+      font-size: 0.75rem;
+      /* Reduced font size */
+      color: rgba(255, 255, 255, 0.8);
+      margin: 0;
+      /* Remove default margin */
+      line-height: 1.2;
+      /* Reduced line height */
+    }
+
+    /* Media queries for responsive behavior */
+    @media (max-width: 992px) {
+      .dropdown-menu {
+        width: 95vw;
+        padding: 8px 12px;
+        /* Further reduced padding on mobile */
+      }
+
+      .dropdown-inner {
+        flex-direction: column;
+      }
+
+      .dropdown-menu-column {
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding-bottom: 6px;
+        /* Reduced padding */
+        margin-bottom: 6px;
+        /* Reduced margin */
+      }
+
+      .dropdown-menu-column:last-child {
+        border-bottom: 0;
+      }
+
+      .dropdown-featured-item {
+        width: 100%;
+        margin-bottom: 6px;
+        /* Reduced margin */
+      }
+    }
+
+    .waitlist-btn {
+      background: linear-gradient(135deg, #6a3ae4, #9969f8);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1.3rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(106, 58, 228, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.9rem;
+      z-index: 10;
+      position: relative;
+    }
+
+    .waitlist-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(106, 58, 228, 0.7);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 8rem 1rem 10rem;
+      position: relative;
+      z-index: 5;
+    }
+
+    .new-badge {
+      display: inline-block;
+      background-color: rgba(106, 58, 228, 0.2);
+      color: #bb86fc;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 5;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(90deg, white, #bb86fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      max-width: 800px;
+      margin: 0 auto 1rem;
+      position: relative;
+      z-index: 5;
+    }
+
+    .hero p {
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+      position: relative;
+      z-index: 5;
+    }
+
+    .start-btn {
+      background-color: white;
+      color: #0a0a0e;
+      border: none;
+      border-radius: 5px;
+      padding: 0.8rem 1.5rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 5;
+      position: relative;
+    }
+
+    .start-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+    }
+
+    /* About us section with white background */
+    .about-section {
+      background-color: white;
+      color: #333;
+      padding: 5rem 2rem;
+      position: relative;
+    }
+
+    /* Curve separator between dark and white sections */
+    .curve-separator {
+      position: absolute;
+      top: -100px;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      fill: white;
+    }
+
+    .about-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .about-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #0a0a0e;
+      position: relative;
+    }
+
+    .about-content h2::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #6a3ae4, #9969f8);
+      border-radius: 2px;
+    }
+
+    .about-content p {
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .highlight {
+      color: #6a3ae4;
+      font-weight: 600;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .stat-card {
+      background-color: #f8f8f8;
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #6a3ae4;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: #555;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .about-image {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .about-image::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 100px;
+      height: 100px;
+      background: rgba(106, 58, 228, 0.1);
+      border-radius: 50%;
+      z-index: -1;
+    }
+
+    /* Secondary navbar styling */
+    .secondary-navbar-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: black;
+      padding: 0;
+      z-index: 10;
+      box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .secondary-navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.8rem 1rem;
+    }
+
+    .secondary-nav-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
+
+    .secondary-nav-item {
+      color: #d8d8d8;
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.3rem 0.8rem;
+      position: relative;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .secondary-nav-item:hover {
+      color: #6a3ae4;
+    }
+
+    .secondary-nav-item.active {
+      color: #6a3ae4;
+      font-weight: 600;
+    }
+
+    .secondary-nav-item.active::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 3px;
+      background: linear-gradient(90deg, #6a3ae4, #9969f8);
+      border-radius: 1.5px;
+    }
+
+    /* Responsive styling */
+    @media (max-width: 768px) {
+      .secondary-navbar {
+        padding: 0.5rem;
+        overflow-x: auto;
+        justify-content: flex-start;
+      }
+
+      .secondary-nav-links {
+        flex-wrap: nowrap;
+        width: 100%;
+        padding: 0.5rem 0;
+      }
+
+      .secondary-navbar::-webkit-scrollbar {
+        height: 3px;
+      }
+
+      .secondary-navbar::-webkit-scrollbar-thumb {
+        background-color: rgba(106, 58, 228, 0.3);
+        border-radius: 3px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .navbar {
+        padding: 1rem;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .dropdown-menu {
+        padding: 15px;
+        width: 95vw;
+      }
+
+      .dropdown-inner {
+        flex-direction: column;
+      }
+
+      .dropdown-menu-column {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 15px 0;
+      }
+
+      .dropdown-featured {
+        flex-direction: column;
+      }
+
+      .dropdown-featured-item {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .dropdown-image-section {
+        display: none;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-content {
+        order: 2;
+      }
+
+      .about-image {
+        order: 1;
+        margin-bottom: 2rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Dark background section -->
+  <div class="dark-section">
+    <!-- Background patterns -->
+    <div class="pattern-circles">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+    <div class="pattern-grid"></div>
+    <div class="pattern-lines"></div>
+
+    <nav class="navbar">
+      <div class="logo-wrapper">
+        <img src="dwip_logo.png" height="100px" width="100px" alt="Dwip Logo" class="logo" /> &nbsp; &nbsp;
+        <img src="Dvip (6).png" height="100px" width="100px" alt="Jio Logo" class="logo" />
+      </div>
+      <div class="nav-links">
+        <div class="nav-item">
+          Services <span class="dropdown-icon"></span>
+          <div class="dropdown-menu">
+            <div class="dropdown-inner">
+              <div class="dropdown-menu-column">
+                <span class="dropdown-menu-title">Security & Infra</span>
+                <a href="#">Jio Centrex™</a>
+                <a href="#">IT Infra Solutions</a>
+                <a href="#">Automation</a>
+                <a href="#">Security Solutions</a>
+              </div>
+              <div class="dropdown-menu-column">
+                <span class="dropdown-menu-title">Management/Energy & Advertising</span>
+                <a href="#">Solar Powered Society</a>
+                <a href="#">Digital Signage</a>
+                <a href="#">Video Door Phone</a>
+                <a href="#">Water Management Solutions</a>
+              </div>
+              <div class="dropdown-menu-column">
+                <span class="dropdown-menu-title">EV & Home Management</span>
+                <a href="#">EV Charging</a>
+                <a href="#">Smart Home Integration</a>
+                <a href="#">DG Set Monitoring</a>
+                <a href="#">JioFIber™ Integration</a>
+              </div>
+              <!-- Services Image Section 1 -->
+              <div class="dropdown-image-section">
+                <div class="dropdown-image-wrapper">
+                  <img src="happy-employees-on-a-successful-team.webp" alt="Communication Services"
+                    class="dropdown-image" />
+                  <div class="dropdown-image-caption">
+                    <h4>Smart Communications</h4>
+                    <p>Enterprise-grade solutions for modern businesses</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Services Image Section 2 -->
+              <div class="dropdown-image-section">
+                <div class="dropdown-image-wrapper">
+                  <img src="happy-employees-on-a-successful-team.webp" alt="Smart Home Solutions"
+                    class="dropdown-image" />
+                  <div class="dropdown-image-caption">
+                    <h4>Smart Living</h4>
+                    <p>Transform your spaces with intelligent technology</p>
+                  </div>
+                </div>
+              </div>
+              <div class="dropdown-image-section">
+                <div class="dropdown-image-wrapper">
+                  <img src="happy-employees-on-a-successful-team.webp" alt="Installation Services"
+                    class="dropdown-image" />
+                  <div class="dropdown-image-caption">
+                    <h4>Expert Installation</h4>
+                    <p>Professional setup and maintenance services</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-featured">
+              <div class="dropdown-featured-item">
+                <div class="dropdown-featured-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
+                </div>
+                <div class="dropdown-featured-content">
+                  <h4>New Client Portal</h4>
+                  <p>Access your services and support in one place</p>
+                </div>
+              </div>
+              <div class="dropdown-featured-item">
+                <div class="dropdown-featured-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <div class="dropdown-featured-content">
+                  <h4>Energy Savings Calculator</h4>
+                  <p>See how much our solutions can save you</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="nav-item">Partners</a>
+        <div class="nav-item">
+          Blog <span class="dropdown-icon"></span>
+          <div class="dropdown-menu">
+            <div class="dropdown-inner">
+              <div class="dropdown-menu-column">
+                <span class="dropdown-menu-title">Articles</span>
+                <a href="#">Latest News</a>
+                <a href="#">Technology Updates</a>
+                <a href="#">Service Highlights</a>
+                <a href="#">Industry Trends</a>
+              </div>
+              <div class="dropdown-menu-column">
+                <span class="dropdown-menu-title">Resources</span>
+                <a href="#">Case Studies</a>
+                <a href="#">White Papers</a>
+                <a href="#">Guides & Tutorials</a>
+                <a href="#">FAQ</a>
+              </div>
+              <div class="dropdown-menu-column">
+                <span class="dropdown-menu-title">Media</span>
+                <a href="#">Videos</a>
+                <a href="#">Podcasts</a>
+                <a href="#">Webinars</a>
+                <a href="#">Events</a>
+              </div>
+              <!-- Blog Image Section 1 -->
+              <div class="dropdown-image-section">
+                <div class="dropdown-image-wrapper">
+                  <img src="happy-employees-on-a-successful-team.webp" alt="Featured Article" class="dropdown-image" />
+                  <div class="dropdown-image-caption">
+                    <h4>Featured Article</h4>
+                    <p>The Future of Residential Communication</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Blog Image Section 2 -->
+              <div class="dropdown-image-section">
+                <div class="dropdown-image-wrapper">
+                  <img src="happy-employees-on-a-successful-team.webp" alt="Latest Webinar" class="dropdown-image" />
+                  <div class="dropdown-image-caption">
+                    <h4>Latest Webinar</h4>
+                    <p>Solar Solutions for Modern Societies</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Blog Image Section 3 -->
+              <div class="dropdown-image-section">
+                <div class="dropdown-image-wrapper">
+                  <img src="happy-employees-on-a-successful-team.webp" alt="Case Study" class="dropdown-image" />
+                  <div class="dropdown-image-caption">
+                    <h4>Case Study</h4>
+                    <p>
+                      How we transformed office communication for a leading
+                      firm
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-featured">
+              <div class="dropdown-featured-item">
+                <div class="dropdown-featured-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                </div>
+                <div class="dropdown-featured-content">
+                  <h4>Featured Article</h4>
+                  <p>The Future of Residential Communication</p>
+                </div>
+              </div>
+              <div class="dropdown-featured-item">
+                <div class="dropdown-featured-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div class="dropdown-featured-content">
+                  <h4>Upcoming Webinar</h4>
+                  <p>Solar Solutions for Modern Societies</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nav-item">
+          About <span class="dropdown-icon"></span>
+          <div class="dropdown-menu">
+            <div class="dropdown-inner">
+              <div class="dropdown-menu-column">
+                <span class="dropdown-menu-title">Company</span>
+                <a href="#">Our Story</a>
+                <a href="#">Leadership Team</a>
+                <a href="#">Vision & Mission</a>
+                <a href="#">Careers</a>
+              </div>
+              <div class="dropdown-menu-column">
+                <span class="dropdown-menu-title">Trust</span>
+                <a href="#">Testimonials</a>
+                <a href="#">Client Success</a>
+                <a href="#">Awards & Recognition</a>
+                <a href="#">Partner Network</a>
+              </div>
+              <div class="dropdown-menu-column">
+                <span class="dropdown-menu-title">Contact</span>
+                <a href="#">Get in Touch</a>
+                <a href="#">Support</a>
+                <a href="#">Locations</a>
+                <a href="#">Service Areas</a>
+              </div>
+              <!-- About Image Section 1 -->
+              <div class="dropdown-image-section">
+                <div class="dropdown-image-wrapper">
+                  <img src="happy-employees-on-a-successful-team.webp" alt="Our Team" class="dropdown-image" />
+                  <div class="dropdown-image-caption">
+                    <h4>Our Team</h4>
+                    <p>Meet the experts behind Dwip Agencies</p>
+                  </div>
+                </div>
+              </div>
+              <!-- About Image Section 2 -->
+              <div class="dropdown-image-section">
+                <div class="dropdown-image-wrapper">
+                  <img src="happy-employees-on-a-successful-team.webp" alt="Our Offices" class="dropdown-image" />
+                  <div class="dropdown-image-caption">
+                    <h4>Our Offices</h4>
+                    <p>Visit our headquarters and experience centers</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-featured">
+              <div class="dropdown-featured-item">
+                <div class="dropdown-featured-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+                <div class="dropdown-featured-content">
+                  <h4>Corporate Offices</h4>
+                  <p>Visit our headquarters and experience centers</p>
+                </div>
+              </div>
+              <div class="dropdown-featured-item">
+                <div class="dropdown-featured-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div class="dropdown-featured-content">
+                  <h4>Career Opportunities</h4>
+                  <p>Join our innovative team of professionals</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="waitlist-btn">Learn More</button>
+    </nav>
+
+    <section class="hero">
+      <div class="new-badge">Trusted Partner of Jio Society</div>
+      <h1>Welcome to Dwip Agencies.</h1>
+      <p>
+        Connect your home and office with our cutting-edge communication and
+        smart living solutions. Trusted by thousands of satisfied customers
+        across India.
+      </p>
+      <button class="start-btn">Learn More</button>
+    </section>
+
+  </div>
+  <div class="secondary-navbar-container">
+    <div class="secondary-navbar">
+      <div class="secondary-nav-links">
+        <a href="#our-story" class="secondary-nav-item active">Our Story</a>
+        <a href="#leadership-team" class="secondary-nav-item">Leadership Team</a>
+        <a href="#vision-mission" class="secondary-nav-item">Vision & Mission</a>
+        <a href="#testimonials" class="secondary-nav-item">Testimonials</a>
+        <a href="#client-success" class="secondary-nav-item">Client Success</a>
+        <a href="#partner-network" class="secondary-nav-item">Partner Network</a>
+        <a href="#locations" class="secondary-nav-item">Locations</a>
+        <a href="#service-areas" class="secondary-nav-item">Service Areas</a>
+      </div>
+    </div>
+  </div>
+  <!-- SVG curve separator -->
+  <svg class="curve-separator" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
+    <path d="M0,0 C240,95 480,100 720,80 C960,60 1200,30 1440,70 L1440,100 L0,100 Z"></path>
+  </svg>
+
+  <!-- About Us section with white background -->
+  <section class="about-section">
+    <div class="about-container">
+      <div class="about-grid">
+        <div class="about-content">
+          <br>
+          <br>
+          <h2>About Dwip Agencies</h2>
+          <br>
+            <p>
+            Founded in 2022, Dwip Agencies has emerged as a
+            <span class="highlight">leading provider</span> of innovative
+            communication and smart living solutions across India. As an
+            authorized partner of Jio Society, we bridge the gap between
+            cutting-edge technology and everyday needs.
+            </p>
+            <p>
+            We specialize in delivering tailored solutions for <span class="highlight">housing societies and gated communities, commercial complexes</span>, enabling secure, connected, and efficient living environments. Our offerings include integrated security, energy management, and seamless communication systems designed to meet the unique needs of residential complexes.
+            </p>
+            <p>
+            Our mission is to transform homes, businesses, and communities with intelligent,
+            sustainable, and user-friendly technology solutions. From advanced
+            office communication systems to smart home automation, we deliver
+            seamless connectivity that enhances productivity and improves
+            quality of life.
+            </p>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-number">100+</div>
+              <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">99%</div>
+              <div class="stat-label">Client Satisfaction</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">3+</div>
+              <div class="stat-label">Years of Excellence</div>
+            </div>
+          </div>
+        </div>
+        <div class="about-image">
+          <img src="happy-employees-on-a-successful-team.webp" alt="Dwip Agencies Team" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script></script>
+</body>
+
+</html>
